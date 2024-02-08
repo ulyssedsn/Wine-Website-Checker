@@ -1,1 +1,4 @@
-# wine_website_checker
+# Wine Website Checker (WWC)
+
+## Description
+ -- SOON --
