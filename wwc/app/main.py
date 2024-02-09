@@ -8,7 +8,8 @@ requests_session = Session()
 
 def find_wine():
     for website in cfg.websites:
-        Factory.instance('web', website, requests_session)
+        print(f"--------- Checking {website} ---------")
+        Factory.instance('web', website, requests_session).search()
 
 
 find_wine()
