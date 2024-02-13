@@ -32,25 +32,40 @@ class MesBourgognesBeaune:
         self._requests_session = requests_session
 
     def search(self):
+        all_result = []
         for keyword in cfg.keywords:
             # print(f"Start - looking at: {keyword}")
             payload = f"s={keyword}"
             response = self._requests_session.post(
                 self._url_builder(), data=payload, headers=self.MBB_HEADERS)
-            self._result_analyser(keyword, response.json())
+            result = self._result_analyser(keyword, response.json())
+            if result:
+                all_result.append(result)
+        return [element for sublist in all_result for element in sublist]
 
     def _url_builder(self):
         return self.MBB_DOMAIN + self.MBB_SEARCH
 
     @staticmethod
     def _result_analyser(keyword, search_result):
+        results = []
         if search_result.get('products'):
             for product in search_result.get('products'):
-                if product['add_to_cart_url'] and (search(rf'{keyword.lower()}', product['name'].lower()) or
-                        search(rf'{keyword.lower()}', product.get('manufacturer_name').lower())):
-                    print(f"PRODUCT FOUND: {product['name']} |"
-                          f" link: {product['link']} |"
-                          f" price: {product['price_amount']} |"
-                          f" has discount: {product['has_discount']} |"
-                          f" discount: {product['discount_amount']}")
-                    print(f"add to cart: {product['add_to_cart_url']}")
+                if product['add_to_cart_url'] and (
+                        search(rf'{keyword.lower()}',
+                               product['name'].lower()) or
+                        search(rf'{keyword.lower()}',
+                               product.get('manufacturer_name').lower())):
+                    # print(f"PRODUCT FOUND: {product['name']} |"
+                    #       f" link: {product['link']} |"
+                    #       f" price: {product['price_amount']} |"
+                    #       f" has discount: {product['has_discount']} |"
+                    #       f" discount: {product['discount_amount']}")
+                    # print(f"add to cart: {product['add_to_cart_url']}")
+                    results.append({
+                        'name': product['name'],
+                        'price': product['price_amount'],
+                        'link': product['add_to_cart_url'],
+                        'image': product['cover']['bySize']['home_default']
+                    })
+        return results

@@ -1,8 +1,11 @@
 from json import load
 from logging import StreamHandler, DEBUG, Formatter, getLogger
+from os import environ
 from os.path import join, dirname
 from pathlib import Path
 from sys import stdout
+
+from dotenv import load_dotenv
 
 
 class WwcConfig(object):
@@ -19,10 +22,13 @@ class WwcConfig(object):
         Perform initialization of the class with a custom method
         Python calls __init__ every time after a call to __new__.
         """
+        load_dotenv()
+
         self.logger = self._logger()
         self.keywords = self._keywords()
         self.websites = self._websites()
         self._version = self._read_version()
+        self.password_gmail = self._password_gmail()
 
     @staticmethod
     def _logger():
@@ -56,3 +62,7 @@ class WwcConfig(object):
     def _read_version():
         with open(join(dirname(__file__), '..', '..', 'VERSION'), 'r') as f:
             return f.read().strip()
+
+    @staticmethod
+    def _password_gmail():
+        return environ.get('PASSWORD_GMAIL')
