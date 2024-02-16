@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+from json import load, dump
 from re import search
 from wwc.utils.config import WwcConfig
 
@@ -46,8 +48,7 @@ class MesBourgognesBeaune:
     def _url_builder(self):
         return self.MBB_DOMAIN + self.MBB_SEARCH
 
-    @staticmethod
-    def _result_analyser(keyword, search_result):
+    def _result_analyser(self, keyword, search_result):
         results = []
         if search_result.get('products'):
             for product in search_result.get('products'):
@@ -56,16 +57,39 @@ class MesBourgognesBeaune:
                                product['name'].lower()) or
                         search(rf'{keyword.lower()}',
                                product.get('manufacturer_name').lower())):
-                    # print(f"PRODUCT FOUND: {product['name']} |"
-                    #       f" link: {product['link']} |"
-                    #       f" price: {product['price_amount']} |"
-                    #       f" has discount: {product['has_discount']} |"
-                    #       f" discount: {product['discount_amount']}")
-                    # print(f"add to cart: {product['add_to_cart_url']}")
-                    results.append({
-                        'name': product['name'],
-                        'price': product['price_amount'],
-                        'link': product['add_to_cart_url'],
-                        'image': product['cover']['bySize']['home_default']
-                    })
+                    if self._store_and_compare(product):
+                        results.append({
+                            'name': product['name'],
+                            'price': product['price_amount'],
+                            'link': product['add_to_cart_url'],
+                            'image': product['cover']['bySize']['home_default'],
+                            'manufacturer_name': product['manufacturer_name']
+                        })
         return results
+
+    def _store_and_compare(self, product):
+        with open(cfg.file_product_found, 'r') as f:
+            data = load(f)
+
+        if product['name'] in data[self.__class__.__name__].keys():
+            return not self._check_time_price(
+                    data[self.__class__.__name__][product['name']], product)
+
+        data[self.__class__.__name__][product['name']] = {
+            "timestamp": str(datetime.now()),
+            "price": product['price_amount']
+        }
+
+        with open(cfg.file_product_found,'w') as f:
+            dump(data, f, indent=4)
+        return True
+
+    @staticmethod
+    def _check_time_price(product_json, product_found):
+        now = datetime.now()
+        if now - datetime.strptime(
+                product_json['timestamp'],
+                '%Y-%m-%d %H:%M:%S.%f') > timedelta(
+                seconds=cfg.expiration_time):
+            return product_json['price'] == product_found['price_amount']
+        return False
