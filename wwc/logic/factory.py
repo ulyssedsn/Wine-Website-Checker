@@ -20,5 +20,4 @@ class Factory:
         except ModuleNotFoundError:
             raise Exception('Module not found')
         except AttributeError:
-            breakpoint()
             raise Exception(f"Error importing {module_name}.{class_name}")

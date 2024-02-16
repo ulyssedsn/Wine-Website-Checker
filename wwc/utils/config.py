@@ -29,6 +29,12 @@ class WwcConfig(object):
         self.websites = self._websites()
         self._version = self._read_version()
         self.password_gmail = self._password_gmail()
+        self.file_product_found = self._file_product_found()
+        self.expiration_time = self._expiration_time()
+        self.email_sender = self._email_sender()
+        self.ud_email = self._ud_email()
+        self.od_email = self._od_email()
+
 
     @staticmethod
     def _logger():
@@ -66,3 +72,24 @@ class WwcConfig(object):
     @staticmethod
     def _password_gmail():
         return environ.get('PASSWORD_GMAIL')
+
+    @staticmethod
+    def _file_product_found():
+        return environ.get('PRODUCT_FOUND_PATH')
+
+    @staticmethod
+    def _expiration_time():
+        return int(environ.get('EXPIRE_AFTER'))
+
+    @staticmethod
+    def _email_sender():
+        return environ.get('EMAIL_SENDER')
+
+    @staticmethod
+    def _ud_email():
+        return environ.get('UD_EMAIL')
+
+    @staticmethod
+    def _od_email():
+        return environ.get('OD_EMAIL')
+

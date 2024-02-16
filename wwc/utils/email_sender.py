@@ -48,6 +48,7 @@ class EmailSender:
                 html_content += f'<h2 style="text-align: center;">{shop.replace("_", " ").title()}</h2>'
                 for wine in wines:
                     name = wine['name']
+                    manufacturer_name = wine['manufacturer_name']
                     price = wine['price']
                     link = wine['link']
                     image_url = wine['image']['url']
@@ -57,8 +58,8 @@ class EmailSender:
                             <img src="{image_url}" alt="{name}">
                         </div>
                         <div class="wine-info">
-                            <p class="wine-name">{name}</p>
-                            <p class="wine-price">Price: {price}</p>
+                            <p class="wine-name">{name} - {manufacturer_name}</p>
+                            <p class="wine-price">Price: {price}€</p>
                             <a href="{link}" class="wine-link">View Product</a>
                         </div>
                     </div>
@@ -70,27 +71,25 @@ class EmailSender:
         </html>
         '''
 
-        gmail_user = "winewebsitechecker@gmail.com"
+        gmail_user = cfg.email_sender
         gmail_app_password = cfg.password_gmail
-        receiver_email = "udansin@hotmail.fr"
+        receiver_emails = [cfg.ud_email, cfg.od_email]
         subject = f"Wine Website Checker - Report {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
 
         msg = MIMEMultipart('alternative')
         msg['Subject'] = subject
         msg['From'] = gmail_user
-        msg['To'] = receiver_email
+        msg['To'] = ", ".join(receiver_emails)
         msg['Reply-To'] = gmail_user
 
-        part1 = MIMEText("No plain txt", 'plain')
         part2 = MIMEText(html_content, 'html')
-        msg.attach(part1)
         msg.attach(part2)
 
         try:
             server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
             server.ehlo()
             server.login(gmail_user, gmail_app_password)
-            server.sendmail(gmail_user, receiver_email, msg.as_string())
+            server.sendmail(gmail_user, receiver_emails, msg.as_string())
             server.close()
 
             print('Email sent!')

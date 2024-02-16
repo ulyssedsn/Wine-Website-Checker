@@ -16,7 +16,8 @@ def find_wine():
         if website_result:
             all_websites_result.append({website: website_result})
     print(all_websites_result)
-    EmailSender(all_websites_result).send_email()
+    if all_websites_result:
+        EmailSender(all_websites_result).send_email()
 
 
 find_wine()

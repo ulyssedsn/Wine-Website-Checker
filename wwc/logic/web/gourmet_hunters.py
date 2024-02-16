@@ -1,4 +1,6 @@
 from re import search
+from datetime import datetime, timedelta
+from json import load, dump
 
 from wwc.utils.config import WwcConfig
 from unidecode import unidecode
@@ -36,7 +38,6 @@ class GourmetHunters:
     def search(self):
         all_result = []
         for keyword in cfg.keywords:
-            # print(f"Start - looking at: {keyword}")
             response = self._requests_session.get(
                 self._url_builder(keyword), headers=GourmetHunters.GH_HEARDERS)
             result = self._result_analyser(keyword, response.text)
@@ -49,8 +50,7 @@ class GourmetHunters:
         return GourmetHunters.GH_DOMAIN + GourmetHunters.GH_SEARCH + unidecode(
             keyword.replace(' ', '+')).lower()
 
-    @staticmethod
-    def _result_analyser(keyword, search_result):
+    def _result_analyser(self, keyword, search_result):
         results = []
         if (("Désolé, mais votre recherche n'a donné aucun résultat. "
              "Pouvons-nous vous recommander l'un de ces vins ?") in
@@ -68,30 +68,53 @@ class GourmetHunters:
             href = title_container['href'].strip()
             origin_title = item.find("p", class_="origen").a.text.strip()
             image_tag = item.find(
-                "img", class_="img-responsive bottle_img vbottom")['src'].strip()
+                "img", class_="img-responsive bottle_img vbottom")[
+                'src'].strip()
 
             if search(rf'{keyword.lower()}', title.lower()):
-                # print(f"PRODUCT FOUND: {title} |"
-                #       f" link: {GourmetHunters.GH_DOMAIN}{href} |"
-                #       f" Producteur: {origin_title} |"
-                #       f" price: {price}")
-                results.append({
-                    'name': title,
-                    'price': price,
-                    'link': f"{GourmetHunters.GH_DOMAIN}{href}",
-                    'image': {'url': image_tag}
-                })
+                if self._store_and_compare({'name': title, 'price': price}):
+                    results.append({
+                        'name': title,
+                        'price': price,
+                        'link': f"{GourmetHunters.GH_DOMAIN}{href}",
+                        'image': {'url': image_tag},
+                        'manufacturer_name': origin_title
+                    })
             elif (origin_title and
                   search(rf'{keyword.lower()}', origin_title.lower())):
-                # print(f"PRODUCT FOUND: {title} |"
-                #       f" link: {GourmetHunters.GH_DOMAIN}{href} |"
-                #       f" price: {price}")
-                results.append({
-                    'name': title,
-                    'price': price,
-                    'link': f"{GourmetHunters.GH_DOMAIN}{href}",
-                    'image': {'url': image_tag}
-                })
+                if self._store_and_compare({'name': title, 'price': price}):
+                    results.append({
+                        'name': title,
+                        'price': price,
+                        'link': f"{GourmetHunters.GH_DOMAIN}{href}",
+                        'image': {'url': image_tag},
+                        'manufacturer_name': origin_title
+                    })
         return results
 
+    def _store_and_compare(self, product):
+        with open(cfg.file_product_found, 'r') as f:
+            data = load(f)
 
+        if product['name'] in data[self.__class__.__name__].keys():
+            return not self._check_time_price(
+                data[self.__class__.__name__][product['name']], product)
+
+        data[self.__class__.__name__][product['name']] = {
+            'timestamp': str(datetime.now()),
+            'price': product['price']
+        }
+
+        with open(cfg.file_product_found, 'w') as f:
+            dump(data, f, indent=4)
+        return True
+
+    @staticmethod
+    def _check_time_price(product_json, product_found):
+        now = datetime.now()
+        if now - datetime.strptime(
+                product_json['timestamp'],
+                '%Y-%m-%d %H:%M:%S.%f') > timedelta(
+            seconds=cfg.expiration_time):
+            return product_json['price'] == product_found['price']
+        return False
