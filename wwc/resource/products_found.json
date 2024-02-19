@@ -124,5 +124,51 @@
             "timestamp": "2024-02-16 09:47:09.289030",
             "price": "33,00 \u20ac"
         }
+    },
+    "VinsNature": {
+        "Rouge": {
+            "timestamp": "2024-02-19 11:43:31.757800",
+            "price": 38
+        }
+    },
+    "Decantalo": {
+        "Domaine Andr\u00e9e L'Envol\u00e9e 2019": {
+            "timestamp": "2024-02-19 13:57:20.858120",
+            "price": null
+        },
+        "Domaine Andr\u00e9e Carbone 2019": {
+            "timestamp": "2024-02-19 13:57:20.860011",
+            "price": null
+        }
+    },
+    "VilaViniteca": {
+        "Domaine Andr\u00e9e Carbone 2019": {
+            "timestamp": "2024-02-19 13:04:37.457345",
+            "price": null
+        },
+        "Domaine Andr\u00e9e L'Envol\u00e9e 2019": {
+            "timestamp": "2024-02-19 13:04:37.459261",
+            "price": null
+        },
+        "Domaine Andr\u00e9e L'Etreinte 2019": {
+            "timestamp": "2024-02-19 13:04:37.460311",
+            "price": null
+        },
+        "Domaine Andr\u00e9e Carbone 2018": {
+            "timestamp": "2024-02-19 13:04:37.461367",
+            "price": null
+        },
+        "Domaine Andr\u00e9e Les Mines 2018": {
+            "timestamp": "2024-02-19 13:04:37.462296",
+            "price": null
+        },
+        "Domaine Andr\u00e9e Anjou Les Farauni\u00e8res 2018": {
+            "timestamp": "2024-02-19 13:04:37.463120",
+            "price": null
+        },
+        "Domaine Andr\u00e9e Anjou Rouge Les Mines 2016": {
+            "timestamp": "2024-02-19 13:04:37.463933",
+            "price": null
+        }
     }
 }
