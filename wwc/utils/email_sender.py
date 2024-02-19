@@ -10,10 +10,51 @@ cfg = WwcConfig()
 
 class EmailSender:
 
-    def __init__(self, result):
-        self._result = result
+    def __init__(self, ):
+        pass
 
-    def send_email(self):
+    def send_error_email(self, site, error):
+        html_content = '''
+            <html>
+            <head>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #ffffff; } /* Fond blanc pour tout le corps de l'email */
+                .email-container { max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; }
+                .header { text-align: center; margin-bottom: 20px; }
+            </style>
+            </head>
+            <body>
+            <div class="email-container">
+                <div class="title">Wine Web Checker Report - FAILURE </div>
+        ''' + f'''
+        Site: {site} error: {error}
+        '''
+
+        gmail_user = cfg.email_sender
+        gmail_app_password = cfg.password_gmail
+        receiver_emails = [cfg.ud_email]
+        subject = f"FAILURE - Wine Website Checker - Report {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = subject
+        msg['From'] = gmail_user
+        msg['To'] = ", ".join(receiver_emails)
+        msg['Reply-To'] = gmail_user
+
+        part2 = MIMEText(html_content, 'html')
+        msg.attach(part2)
+
+        try:
+            server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+            server.ehlo()
+            server.login(gmail_user, gmail_app_password)
+            server.sendmail(gmail_user, receiver_emails, msg.as_string())
+            server.close()
+
+            print('Email sent!')
+        except Exception as exception:
+            print("Error: %s!\n\n" % exception)
+    def send_email(self, result):
         html_content = '''
         <html>
         <head>
@@ -43,7 +84,7 @@ class EmailSender:
             <div class="title">Wine Web Checker Report</div>
         '''
 
-        for shop_dict in self._result:
+        for shop_dict in result:
             for shop, wines in shop_dict.items():
                 html_content += f'<h2 style="text-align: center;">{shop.replace("_", " ").title()}</h2>'
                 for wine in wines:
@@ -73,7 +114,9 @@ class EmailSender:
 
         gmail_user = cfg.email_sender
         gmail_app_password = cfg.password_gmail
+        receiver_emails = [cfg.ud_email]
         receiver_emails = [cfg.ud_email, cfg.od_email]
+
         subject = f"Wine Website Checker - Report {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
 
         msg = MIMEMultipart('alternative')
