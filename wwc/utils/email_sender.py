@@ -10,10 +10,11 @@ cfg = WwcConfig()
 
 class EmailSender:
 
-    def __init__(self, ):
-        pass
+    def __init__(self, user):
+        self._email = user['email']
 
-    def send_error_email(self, site, error):
+    @staticmethod
+    def send_error_email(site, error):
         html_content = '''
             <html>
             <head>
@@ -54,6 +55,7 @@ class EmailSender:
             print('Email sent!')
         except Exception as exception:
             print("Error: %s!\n\n" % exception)
+
     def send_email(self, result):
         html_content = '''
         <html>
@@ -114,8 +116,7 @@ class EmailSender:
 
         gmail_user = cfg.email_sender
         gmail_app_password = cfg.password_gmail
-        receiver_emails = [cfg.ud_email]
-        receiver_emails = [cfg.ud_email, cfg.od_email]
+        receiver_emails = [self._email]
 
         subject = f"Wine Website Checker - Report {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
 

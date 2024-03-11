@@ -31,12 +31,15 @@ class Decantalo:
                       'Chrome/121.0.0.0 Safari/537.36'
     }
 
-    def __init__(self, requests_session):
+    def __init__(self, requests_session, user):
         self._requests_session = requests_session
+        self._user_keywords = user['keywords']
+        self._user_results = user['results']
+
 
     def search(self):
         all_result = []
-        for keyword in cfg.keywords:
+        for keyword in self._user_keywords:
             response = self._requests_session.get(
                 self._url_builder(keyword),
                 headers=self.D_HEADERS)
@@ -69,7 +72,7 @@ class Decantalo:
         return results
 
     def _store_and_compare(self, product):
-        with open(cfg.file_product_found, 'r') as f:
+        with open(self._user_results, 'r') as f:
             data = load(f)
         if product['title'] in data[self.__class__.__name__].keys():
             return not self._check_time_price(
@@ -77,10 +80,10 @@ class Decantalo:
 
         data[self.__class__.__name__][product['title']] = {
             "timestamp": str(datetime.now()),
-            "price": product.get('price_amount')
+            "price": ''
         }
 
-        with open(cfg.file_product_found, 'w') as f:
+        with open(self._user_results, 'w') as f:
             dump(data, f, indent=4)
         return True
 
@@ -91,5 +94,5 @@ class Decantalo:
                 product_json['timestamp'],
                 '%Y-%m-%d %H:%M:%S.%f') > timedelta(
             seconds=cfg.expiration_time):
-            return product_json['price'] == product_found['price_amount']
+            return product_json['price'] == ''
         return False

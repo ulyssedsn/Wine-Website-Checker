@@ -25,16 +25,14 @@ class WwcConfig(object):
         load_dotenv()
 
         self.logger = self._logger()
-        self.keywords = self._keywords()
         self.websites = self._websites()
         self._version = self._read_version()
         self.password_gmail = self._password_gmail()
-        self.file_product_found = self._file_product_found()
+        self.users = self._users()
         self.expiration_time = self._expiration_time()
         self.email_sender = self._email_sender()
         self.ud_email = self._ud_email()
         self.od_email = self._od_email()
-
 
     @staticmethod
     def _logger():
@@ -52,9 +50,15 @@ class WwcConfig(object):
         logger.addHandler(handler)
         return logger
 
+    def _users(self):
+        return [{'email': self._od_email(), 'keywords': self._keywords('keyword_od.json'),
+                 'results': self._file_product_found('products_found_od.json')},
+                {'email': self._ud_email(), 'keywords': self._keywords('keyword_ud.json'),
+                 'results': self._file_product_found('products_found_ud.json')}]
+
     @staticmethod
-    def _keywords():
-        path = f"{Path(__file__).parent}/../config/keyword.json"
+    def _keywords(filename):
+        path = f"{Path(__file__).parent}/../config/{filename}"
         with open(path, 'r') as file:
             return load(file)
 
@@ -74,8 +78,8 @@ class WwcConfig(object):
         return environ.get('PASSWORD_GMAIL')
 
     @staticmethod
-    def _file_product_found():
-        return environ.get('PRODUCT_FOUND_PATH')
+    def _file_product_found(filename):
+        return environ.get('PRODUCT_FOUND_PATH') + filename
 
     @staticmethod
     def _expiration_time():
@@ -92,4 +96,3 @@ class WwcConfig(object):
     @staticmethod
     def _od_email():
         return environ.get('OD_EMAIL')
-
