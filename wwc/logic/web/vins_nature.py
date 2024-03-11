@@ -31,13 +31,15 @@ class VinsNature:
         'sec-ch-ua-platform': '"macOS"'
     }
 
-    def __init__(self, requests_session):
+    def __init__(self, requests_session, user):
         self._requests_session = requests_session
+        self._user_keywords = user['keywords']
+        self._user_results = user['results']
 
     def search(self):
         all_result = []
 
-        for keyword in cfg.keywords:
+        for keyword in self._user_keywords:
             payload = f"s={keyword}&resultsPerPage=30"
             response = self._requests_session.post(
                 self._url_builder(), data=payload, headers=self.VN_HEADERS)
@@ -84,7 +86,7 @@ class VinsNature:
         return results
 
     def _store_and_compare(self, product):
-        with open(cfg.file_product_found, 'r') as f:
+        with open(self._user_results, 'r') as f:
             data = load(f)
         if product['name'] in data[self.__class__.__name__].keys():
             return not self._check_time_price(
@@ -95,7 +97,7 @@ class VinsNature:
             "price": product['price_amount']
         }
 
-        with open(cfg.file_product_found, 'w') as f:
+        with open(self._user_results, 'w') as f:
             dump(data, f, indent=4)
         return True
 

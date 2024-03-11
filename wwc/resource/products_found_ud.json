@@ -1,0 +1,374 @@
+{
+    "Avintures": {
+        "Zenith 2022": {
+            "timestamp": "2024-02-20 16:25:36.295658",
+            "price": 28
+        },
+        "Force of Nature 2021": {
+            "timestamp": "2024-02-20 16:25:36.296344",
+            "price": 25
+        },
+        "Arcane 2022": {
+            "timestamp": "2024-02-20 16:25:36.296857",
+            "price": 28
+        },
+        "Veronnet Rouge 2022": {
+            "timestamp": "2024-02-20 16:25:36.297584",
+            "price": 22
+        },
+        "Veronnet Blanc 2022": {
+            "timestamp": "2024-02-20 16:25:36.297971",
+            "price": 22
+        },
+        "Jacqu\u00e8re Mont\u00e9e Furieuse 2022": {
+            "timestamp": "2024-02-20 16:25:36.298133",
+            "price": 25
+        },
+        "Jacqu\u00e8re Mont\u00e9e Furieuse 2022 MAGNUM": {
+            "timestamp": "2024-02-20 16:25:36.298276",
+            "price": 66
+        },
+        "Zenith 2022 MAGNUM": {
+            "timestamp": "2024-02-20 16:25:36.298437",
+            "price": 66
+        },
+        "Arcane 2022 MAGNUM": {
+            "timestamp": "2024-02-20 16:25:36.298644",
+            "price": 66
+        },
+        "Force of Nature 2021 MAGNUM": {
+            "timestamp": "2024-02-20 16:25:36.298824",
+            "price": 66
+        },
+        "Com\u00e8te P\u00e9tillant 2022": {
+            "timestamp": "2024-02-20 16:25:36.298985",
+            "price": 26.5
+        },
+        "Grand Ordinaire 2022": {
+            "timestamp": "2024-02-20 16:25:36.769929",
+            "price": 24
+        },
+        "Guteldel Blanc 2022": {
+            "timestamp": "2024-02-20 16:25:36.773033",
+            "price": 24
+        },
+        "Riesling Elevage 30 mois 2020": {
+            "timestamp": "2024-02-20 16:25:36.773325",
+            "price": 62
+        }
+    },
+    "MesBourgognesBeaune": {
+        "Bourgogne Aligot\u00e9 2022": {
+            "timestamp": "2024-03-11 09:47:29.291443",
+            "price": 30
+        }
+    },
+    "CavePurJus": {
+        "Indigo - 2020 - Aur\u00e9lien Houillon": {
+            "timestamp": "2024-02-20 16:25:38.680243",
+            "price": 39
+        },
+        "Indigo - 2019 - Aur\u00e9lien Houillon": {
+            "timestamp": "2024-02-20 16:25:38.681395",
+            "price": 39
+        },
+        "Le Safre - 2020 - Aur\u00e9lien Houillon": {
+            "timestamp": "2024-02-20 16:25:38.682191",
+            "price": 47
+        },
+        "Cinsault - 2020 - Aur\u00e9lien Houillon": {
+            "timestamp": "2024-02-20 16:25:38.682799",
+            "price": 39
+        },
+        "Cinsault - 2021 - Aur\u00e9lien Houillon": {
+            "timestamp": "2024-02-20 16:25:38.683049",
+            "price": 39
+        },
+        "\u00c0 gagner en d\u00e9cembre": {
+            "timestamp": "2024-02-20 16:25:40.353818",
+            "price": 0
+        }
+    },
+    "GourmetHunters": {
+        "Tony Bornard Point Barre 2020": {
+            "timestamp": "2024-02-20 16:25:44.913913",
+            "price": "47,57\u20ac"
+        },
+        "Bornard Au Fil des G\u00e9n\u00e9rations Blanc 2019": {
+            "timestamp": "2024-02-20 16:25:44.914336",
+            "price": "55,37\u20ac"
+        },
+        "Bornard Au Fil des G\u00e9n\u00e9rations Rouge 2019": {
+            "timestamp": "2024-02-20 16:25:44.914638",
+            "price": "58,97\u20ac"
+        }
+    },
+    "LesZinzinsDuVin": {
+        "La Lune 2018 ferme de la Sansonni\u00e8re": {
+            "timestamp": "2024-02-20 16:25:35.673340",
+            "price": "70,00 \u20ac"
+        },
+        "Chardonnay Le clos 2020 Jacob": {
+            "timestamp": "2024-02-20 16:25:35.674265",
+            "price": "58,00 \u20ac"
+        },
+        "Le blanc 2022 Miroudots": {
+            "timestamp": "2024-02-20 16:25:35.674561",
+            "price": "18,00 \u20ac"
+        },
+        "Dario 33\u20ac": {
+            "timestamp": "2024-02-20 16:25:35.677486",
+            "price": "33,00 \u20ac"
+        },
+        "Tout facile 2021 Dos d'chat": {
+            "timestamp": "2024-02-21 12:33:20.692197",
+            "price": "21,00 \u20ac"
+        },
+        "Bodines 2022 Dos d'chat": {
+            "timestamp": "2024-02-21 12:33:20.695621",
+            "price": "40,00 \u20ac"
+        },
+        "Les gaudrettes 2022 Saint Pierre": {
+            "timestamp": "2024-02-21 12:33:20.696279",
+            "price": "60,00 \u20ac"
+        },
+        "Si loin si pr\u00e9s 2021 Maison Maenad": {
+            "timestamp": "2024-02-21 12:33:20.696716",
+            "price": "55,00 \u20ac"
+        },
+        "Si loin si pr\u00e9s 2021 3 autres cols mini Maison Maenad": {
+            "timestamp": "2024-02-22 09:45:57.316252",
+            "price": "55,00 \u20ac"
+        },
+        "Kamiel 73\u20ac": {
+            "timestamp": "2024-02-23 11:42:22.747703",
+            "price": "73,00 \u20ac"
+        },
+        "La montagne 2021 Anglore": {
+            "timestamp": "2024-02-23 11:42:22.750684",
+            "price": "55,00 \u20ac"
+        },
+        "Sous la roche 2019 magnum Ganevat": {
+            "timestamp": "2024-02-23 11:42:22.751860",
+            "price": "250,00 \u20ac"
+        },
+        "Ros\u00e9 d'un jour 2018 ferme de la Sansonni\u00e8re": {
+            "timestamp": "2024-02-27 10:09:24.877014",
+            "price": "34,50 \u20ac"
+        },
+        "Les blanderies 2021 ferme de la Sansonni\u00e8re": {
+            "timestamp": "2024-02-27 10:09:24.878410",
+            "price": "88,00 \u20ac"
+        },
+        "Les ruelles 2020 ferme de la Sansonni\u00e8re": {
+            "timestamp": "2024-02-27 10:09:24.878918",
+            "price": "70,00 \u20ac"
+        },
+        "Les g\u00e9linettes 2022 ferme de la Sansonni\u00e8re": {
+            "timestamp": "2024-02-27 10:09:24.879462",
+            "price": "45,00 \u20ac"
+        },
+        "Le orange 2022 Weber": {
+            "timestamp": "2024-02-28 12:39:23.629163",
+            "price": "36,00 \u20ac"
+        },
+        "Le blanc 2022 Weber": {
+            "timestamp": "2024-02-28 12:39:23.633286",
+            "price": "36,00 \u20ac"
+        },
+        "Gewurztraminer Bild 2022 Schueller": {
+            "timestamp": "2024-02-28 12:39:23.635146",
+            "price": "32,00 \u20ac"
+        },
+        "LN012 2022 Schueller": {
+            "timestamp": "2024-02-28 12:39:23.636738",
+            "price": "40,00 \u20ac"
+        },
+        "Joujou 2022 Clos Bateau": {
+            "timestamp": "2024-02-29 09:44:17.700766",
+            "price": "24,00 \u20ac"
+        },
+        "Croix Pennet 2022 Clos Bateau": {
+            "timestamp": "2024-02-29 09:44:17.701688",
+            "price": "25,00 \u20ac"
+        },
+        "Strange flower 2020 pet nat Clos bateau": {
+            "timestamp": "2024-02-29 09:44:17.702272",
+            "price": "30,00 \u20ac"
+        },
+        "Aptemiz Orange 2022 Clos bateau": {
+            "timestamp": "2024-02-29 09:44:17.702822",
+            "price": "27,00 \u20ac"
+        },
+        "Bateau blanc 2022 Clos bateau": {
+            "timestamp": "2024-03-05 10:34:18.882999",
+            "price": "27,00 \u20ac"
+        },
+        "Ultre\u00efa 2022 Petit bouchon": {
+            "timestamp": "2024-03-07 13:21:54.243006",
+            "price": "26,00 \u20ac"
+        },
+        "Aligot\u00e9 2021 Dandelion": {
+            "timestamp": "2024-03-07 13:21:54.245329",
+            "price": "50,00 \u20ac"
+        },
+        "Peter 30\u20ac": {
+            "timestamp": "2024-03-08 09:39:29.461464",
+            "price": "30,00 \u20ac"
+        },
+        "Hautes C\u00f4tes Nature 2021 Dandelion": {
+            "timestamp": "2024-03-08 09:39:29.464402",
+            "price": "65,00 \u20ac"
+        },
+        "Grandes Orgues 2320 Arbre Blanc mini 3 autres cols": {
+            "timestamp": "2024-03-08 09:39:29.465267",
+            "price": "110,00 \u20ac"
+        },
+        "Vin jaune 2014 Ganevat": {
+            "timestamp": "2024-03-08 09:39:29.466429",
+            "price": "150,00 \u20ac"
+        },
+        "C\u00f4te de nuits plantes au bois 2022 Lienhardt": {
+            "timestamp": "2024-03-11 09:47:21.960565",
+            "price": "46,00 \u20ac"
+        },
+        "Pinot noir magnum 2022 Lienhardt": {
+            "timestamp": "2024-03-11 09:47:21.962387",
+            "price": "74,00 \u20ac"
+        },
+        "Delta 2023 Absurde g\u00e9nie des fleurs": {
+            "timestamp": "2024-03-11 09:47:21.963539",
+            "price": "26,00 \u20ac"
+        },
+        "Arc 2023 Absurde g\u00e9nie des fleurs": {
+            "timestamp": "2024-03-11 09:47:21.965060",
+            "price": "20,00 \u20ac"
+        }
+    },
+    "VinsNature": {
+        "Trousseau": {
+            "timestamp": "2024-02-20 16:25:53.180513",
+            "price": 27.9
+        },
+        "Rougissime": {
+            "timestamp": "2024-02-20 16:25:53.181822",
+            "price": 27
+        },
+        "Cr\u00e9mant Du Jura": {
+            "timestamp": "2024-02-20 16:25:53.182507",
+            "price": 20.5
+        },
+        "Chardonnay Vieilles Vignes Sous Voile": {
+            "timestamp": "2024-02-20 16:25:53.183475",
+            "price": 30
+        },
+        "Pinot Noir": {
+            "timestamp": "2024-02-20 16:25:53.188452",
+            "price": 26.2
+        },
+        "Chardonnay Au Vignet": {
+            "timestamp": "2024-02-20 16:25:53.189863",
+            "price": 30.8
+        },
+        "Le Clos Chardonnay": {
+            "timestamp": "2024-03-07 13:22:07.821664",
+            "price": 75
+        },
+        "Cuv\u00e9e R Riesling": {
+            "timestamp": "2024-03-08 09:39:43.749252",
+            "price": 55
+        },
+        "Aux Perri\u00e8res Pinot Noir": {
+            "timestamp": "2024-03-08 09:39:43.751623",
+            "price": 65
+        },
+        "Clos de Jerminy": {
+            "timestamp": "2024-03-11 09:47:42.597857",
+            "price": 25
+        },
+        "Savagnin Typ\u00e9": {
+            "timestamp": "2024-03-11 09:47:42.600272",
+            "price": 38.6
+        },
+        "Charmille Chardonnay": {
+            "timestamp": "2024-03-11 09:47:42.601180",
+            "price": 26.6
+        },
+        "Chardonnay Vieilles Vignes Sous Voile \"Au Chapeau\"": {
+            "timestamp": "2024-03-11 09:47:42.601862",
+            "price": 34
+        }
+    },
+    "Decantalo": {
+        "Cuatro Rayas Organic Verdejo 2022": {
+            "timestamp": "2024-02-20 16:25:54.760032",
+            "price": ""
+        },
+        "Cuatro Rayas Vendimia Nocturna Verdejo 2023": {
+            "timestamp": "2024-02-20 16:25:54.760942",
+            "price": ""
+        },
+        "Cuatro Rayas Cuarenta Vendimias Verdejo 2022": {
+            "timestamp": "2024-02-20 16:25:54.761657",
+            "price": ""
+        },
+        "Cuatro Rayas Cuarenta Vendimias Verdejo 2021": {
+            "timestamp": "2024-02-20 16:25:54.762345",
+            "price": ""
+        },
+        "Cuatro Rayas Fermentado en Barrica 2022": {
+            "timestamp": "2024-02-20 16:25:54.763038",
+            "price": ""
+        },
+        "Cuatro Rayas Verdejo 1935 2022": {
+            "timestamp": "2024-02-20 16:25:54.763756",
+            "price": ""
+        },
+        "Cuatro Rayas Cuarenta Vendimias Sauvignon Blanc 2022": {
+            "timestamp": "2024-02-20 16:25:54.764483",
+            "price": ""
+        },
+        "Cuatro Rayas Longverdejo Gran Vino De Rueda 2021": {
+            "timestamp": "2024-02-20 16:25:54.765212",
+            "price": ""
+        },
+        "Cuatro Rayas 61 Dorado en Rama": {
+            "timestamp": "2024-02-20 16:25:54.765984",
+            "price": ""
+        },
+        "Cuatro Rayas Cuarenta Vendimias Cuv\u00e9e Gran Vino de Rueda 2021": {
+            "timestamp": "2024-02-20 16:25:54.767211",
+            "price": ""
+        },
+        "Cuatro Rayas Amador Diez 2018": {
+            "timestamp": "2024-02-20 16:25:54.768211",
+            "price": ""
+        },
+        "61 Vermouth Verdejo": {
+            "timestamp": "2024-02-20 16:25:54.769599",
+            "price": ""
+        },
+        "Cuatro Rayas Organic Verdejo 2023": {
+            "timestamp": "2024-03-04 10:15:32.421154",
+            "price": ""
+        },
+        "Cuatro Rayas Verdejo 1935 2023": {
+            "timestamp": "2024-03-04 10:15:32.425595",
+            "price": ""
+        },
+        "Cuatro Rayas Vendimia Nocturna Verdejo 2022": {
+            "timestamp": "2024-03-07 13:22:12.175361",
+            "price": ""
+        }
+    },
+    "VilaViniteca": {
+        "Domaine Bornard Au Fil Des G\u00e9n\u00e9rations 2019": {
+            "timestamp": "2024-02-20 16:25:25.363883",
+            "price": ""
+        },
+        "Domaine Bornard Le  Jo  Liqueur 2018  0,7 L ": {
+            "timestamp": "2024-02-20 16:25:25.365180",
+            "price": ""
+        }
+    }
+}
