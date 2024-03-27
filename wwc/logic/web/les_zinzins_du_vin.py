@@ -1,6 +1,10 @@
+import configparser
+
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 from json import load, dump
+
+from requests import Session
 
 from wwc.utils.config import WwcConfig
 
@@ -8,20 +12,24 @@ cfg = WwcConfig()
 
 
 class LesZinzinsDuVin:
-    LZDV_DOMAIN = 'https://www.leszinzinsduvin.com/'
+    LZDV_DOMAIN = 'https://www.leszinzinsduvin.com/vins.php'
     LZDV_HEADERS = {
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,'
-                  '*/*;q=0.8',
-        'Sec-Fetch-Site': 'none',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Sec-Fetch-Mode': 'navigate',
-        'Host': 'www.leszinzinsduvin.com',
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
-                      'AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 '
-                      'Safari/605.1.15',
-        'Accept-Language': 'en-GB,en;q=0.9',
-        'Sec-Fetch-Dest': 'document',
-        'Connection': 'keep-alive'
+        'authority': 'www.leszinzinsduvin.com',
+        'accept': '*/*',
+        'accept-language': 'en-US,en;q=0.9,fr;q=0.8',
+        'cache-control': 'no-cache',
+        'content-type': 'application/x-www-form-urlencoded',
+        'dnt': '1',
+        'origin': 'https://www.leszinzinsduvin.com',
+        'pragma': 'no-cache',
+        'referer': 'https://www.leszinzinsduvin.com/vins.php',
+        'sec-ch-ua': '"Not(A:Brand";v="24", "Chromium";v="122"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"macOS"',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-origin',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
     }
 
     def __init__(self, requests_session, user):
@@ -30,41 +38,52 @@ class LesZinzinsDuVin:
         self._user_results = user['results']
 
     def search(self):
-        response = self._requests_session.get(
-            LesZinzinsDuVin.LZDV_DOMAIN,
-            headers=LesZinzinsDuVin.LZDV_HEADERS
-        )
-        return self._filter_new_wines(response.text)
+        wines = []
+        index = 0
+        while True:
+            payload = f'xajax=recherche&xajaxr=1711110398872&xajaxargs%5B%5D=%3Cxjxquery%3E%3Cq%3Eregion%3D%26prix%3D%26cepage%3D%26couleur%3D%3C%2Fq%3E%3C%2Fxjxquery%3E&xajaxargs%5B%5D={index}'
+            response = self._requests_session.post(
+                LesZinzinsDuVin.LZDV_DOMAIN,
+                data=payload,
+                headers=LesZinzinsDuVin.LZDV_HEADERS
+            )
+            response.raise_for_status()
+            if len(response.text) < 500:
+                return wines
+            wines = wines + self._filter_new_wines(response.text)
+            index += 1
+
 
     def _filter_new_wines(self, html_page):
-        soup = BeautifulSoup(html_page, 'html.parser')
+        soup = BeautifulSoup(html_page, "xml")
+        html_content = soup.find('cmd', attrs={'t': 'liste_vins'}).text
+        soup_html = BeautifulSoup(html_content, "html.parser")
+
+
         wines = []
-
-        for wine_div in soup.find_all("div", class_="displayVin"):
-            appellation_vin = wine_div.find("h6",
-                                            class_="appelation_vin").text.strip()
-            nom_domaine = wine_div.find("p", class_="nom_domaine").text.strip()
-            prix = wine_div.find("p", class_="prix").text.strip()
-
-            if wine_div.find("div", class_="novelties__blockImg").img:
-                photo_vin_src = \
-                    (LesZinzinsDuVin.LZDV_DOMAIN +
-                     wine_div.find("div", class_="novelties__blockImg").img[
-                         'src'])
-            else:
-                photo_vin_src = 'https://www.leszinzinsduvin.com/ressources/vins/vin_'
-            data_url = wine_div.find("div", class_="novelties__card -list")[
-                'data-url']
+        for wine_card in soup_html.find_all("div", class_="novelties__card -list"):
+            appelation_vin = wine_card.find("h6", class_="appelation_vin").get_text(strip=True) if wine_card.find(
+                "h6", class_="appelation_vin") else "N/A"
+            nom_domaine = wine_card.find("p", class_="nom_domaine").get_text(strip=True) if wine_card.find(
+                "p",class_="nom_domaine") else "N/A"
+            bouche_vin = wine_card.find("p", class_="bouche_vin").get_text(strip=True) if wine_card.find(
+                "p", class_="bouche_vin") else "N/A"
+            prix = wine_card.find("p", class_="prix").get_text(strip=True) if wine_card.find(
+                "p", class_="prix") else "N/A"
+            photo_vin = wine_card.find("img", class_="photo_vin")["src"].strip() if wine_card.find(
+                "img", class_="photo_vin") else "N/A"
+            data_url = wine_card["data-url"].strip() if "data-url" in wine_card.attrs else "N/A"
 
             if self._store_and_compare(
-                    {'name': appellation_vin, 'price': prix}):
+                    {'name': appelation_vin, 'price': prix}):
                 wines.append({
-                    "name": appellation_vin,
+                    "name": appelation_vin,
                     "manufacturer_name": nom_domaine,
                     "price": prix,
-                    "image": {'url': photo_vin_src},
-                    "link": LesZinzinsDuVin.LZDV_DOMAIN + data_url
+                    "image": {'url': "https://www.leszinzinsduvin.com/" + photo_vin},
+                    "link": "https://www.leszinzinsduvin.com/" + data_url
                 })
+
         return wines
 
     def _store_and_compare(self, product):
