@@ -1,4 +1,5 @@
 import configparser
+import json
 
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
@@ -49,7 +50,8 @@ class LesZinzinsDuVin:
             )
             response.raise_for_status()
             if len(response.text) < 500:
-                return wines
+                return [json.loads(t) for t in set(json.dumps(d, sort_keys=True) for d in wines)]
+
             wines = wines + self._filter_new_wines(response.text)
             index += 1
 

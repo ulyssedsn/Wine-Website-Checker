@@ -105,6 +105,18 @@
         "Bornard Au Fil des G\u00e9n\u00e9rations Rouge 2019": {
             "timestamp": "2024-02-20 16:25:44.914638",
             "price": "58,97\u20ac"
+        },
+        "Tony Bornard Melon Le Rouge Queue 2020 Magnum": {
+            "timestamp": "2024-04-02 10:25:44.013582",
+            "price": "153,69\u20ac"
+        },
+        "Tony Bornard Le Garde Corps 2018 Magnum": {
+            "timestamp": "2024-04-02 10:25:44.019051",
+            "price": "116,49\u20ac"
+        },
+        "Tony Bornard Les Chassagnes 2020 Magnum": {
+            "timestamp": "2024-04-02 10:25:44.022878",
+            "price": "99,94\u20ac"
         }
     },
     "LesZinzinsDuVin": {
@@ -5391,6 +5403,26 @@
         "La forge du Clos de Tart 2011": {
             "timestamp": "2024-03-27 13:53:44.474141",
             "price": "188,00 \u20ac"
+        },
+        "Theodore 58\u20ac": {
+            "timestamp": "2024-04-03 13:45:18.553022",
+            "price": "58,00 \u20ac"
+        },
+        "Pinot noir cuv\u00e9e julien 2022 Ganevat": {
+            "timestamp": "2024-04-03 13:45:18.762989",
+            "price": "75,00 \u20ac"
+        },
+        "Domaine des Tours Blanc Clairette 2018": {
+            "timestamp": "2024-04-03 13:45:18.768457",
+            "price": "40,00 \u20ac"
+        },
+        "Pinot noir 2021 Dumas": {
+            "timestamp": "2024-04-03 13:45:18.865986",
+            "price": "24,00 \u20ac"
+        },
+        "Les Tours Blanc 2019": {
+            "timestamp": "2024-04-03 13:45:18.988130",
+            "price": "50,00 \u20ac"
         }
     },
     "VinsNature": {
@@ -5445,6 +5477,10 @@
         "Chardonnay Vieilles Vignes Sous Voile \"Au Chapeau\"": {
             "timestamp": "2024-03-11 09:47:42.601862",
             "price": 34
+        },
+        "Poulsard": {
+            "timestamp": "2024-04-03 13:18:06.228455",
+            "price": 27.6
         }
     },
     "Decantalo": {
